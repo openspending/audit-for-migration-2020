@@ -1,0 +1,117 @@
+{
+  "bytes": 550111,
+  "count_of_rows": 10000,
+  "hash": "816312d9c24966242650f6c997cdf0c8",
+  "profile": "data-package",
+  "resources": [
+    {
+      "bytes": 550111,
+      "dialect": {
+        "caseSensitiveHeader": false,
+        "delimiter": ",",
+        "doubleQuote": true,
+        "header": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "509cdbaf208031bfc788ad462de396ad",
+      "name": "_6018ab87076187018fc29c94a68a3cd260aeb5daa9739a0d__202006101424",
+      "path": "_6018ab87076187018fc29c94a68a3cd260aeb5daa9739a0d__202006101424.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "format": "default",
+            "name": "monto_adefas",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "monto_aprobado",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "monto_devengado",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "monto_ejercicio",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "monto_ejercido",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "monto_modificado",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "monto_pagado",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "activity_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "administrative_classification_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "budget_line_id_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "date_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "economic_classification_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "expenditure_type_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "fin_source_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "functional_classification_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "geo_source_id",
+            "type": "integer"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "bytes": 1054200721,
+  "count_of_rows": 2814431,
+  "hash": "a64a7efbd172e0a5f90e4f960ca27cdd",
+  "profile": "data-package",
+  "resources": [
+    {
+      "bytes": 1054200721,
+      "dialect": {
+        "caseSensitiveHeader": false,
+        "delimiter": ",",
+        "doubleQuote": true,
+        "header": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "6adaeb4880bfadf66655af32f737afcb",
+      "name": "fdp_6018ab8707618701_eu_esif_funds_benefici_479dd2fc_202006101058",
+      "path": "fdp_6018ab8707618701_eu_esif_funds_benefici_479dd2fc_202006101058.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "format": "default",
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "project_name",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_name",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "total_amount",
+            "type": "number"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "eu_cofinancing_amount",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "total_amount_eligible",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "eu_cofinancing_amount_eligible",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "amount_kind",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "approval_date",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_address",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_city",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_country",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_country_code",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_county",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_id",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_nuts_code",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_nuts_region",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_person",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_postal_code",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "beneficiary_url",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "cci_program_code",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "completion_date",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "eu_cofinancing_rate",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "final_payment_date",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "first_payment_date",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "fund_acronym",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "funding_period",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "management_authority",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "member_state_amount",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "operational_programme",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "priority_label",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "priority_number",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "project_description",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "project_status",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "source",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "starting_date",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "theme_code",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "theme_name",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "third_party_amount",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "total_amount_applied",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ]
+}

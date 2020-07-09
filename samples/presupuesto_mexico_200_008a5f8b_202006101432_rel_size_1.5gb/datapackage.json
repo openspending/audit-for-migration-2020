@@ -1,0 +1,237 @@
+{
+  "bytes": 5296427,
+  "count_of_rows": 10000,
+  "hash": "4891cbd732820aae72f79ac28c484aba",
+  "profile": "data-package",
+  "resources": [
+    {
+      "bytes": 5296427,
+      "dialect": {
+        "caseSensitiveHeader": false,
+        "delimiter": ",",
+        "doubleQuote": true,
+        "header": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "31281d05da0c836e7c5fb9fe6835b988",
+      "name": "fdp_23704d78614b34c5_presupuesto_mexico_200_008a5f8b_202006101432_rel_size_1.5gb",
+      "path": "fdp_23704d78614b34c5_presupuesto_mexico_200_008a5f8b_202006101432_rel_size_1.5gb.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "format": "default",
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "CICLO",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "DESC_AI",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_CAPITULO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_CONCEPTO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_FF",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_FUNCION",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_GPO_FUNCIONAL",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_MODALIDAD",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_PARTIDA_ESPECIFICA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_PARTIDA_GENERICA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_PP",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_RAMO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_SUBFUNCION",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_TIPOGASTO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "DESC_UR",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "ENTIDAD_FEDERATIVA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "GPO_FUNCIONAL",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_AI",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_CAPITULO",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_CLAVE_CARTERA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "ID_CONCEPTO",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_ENTIDAD_FEDERATIVA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "ID_FF",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_FUNCION",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_MODALIDAD",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "ID_PARTIDA_ESPECIFICA",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "ID_PARTIDA_GENERICA",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_PP",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_RAMO",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_SUBFUNCION",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_TIPOGASTO",
+            "type": "integer"
+          },
+          {
+            "format": "default",
+            "name": "ID_UR",
+            "type": "any"
+          },
+          {
+            "format": "default",
+            "name": "MONTO_ADEFAS",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "MONTO_APROBADO",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "MONTO_DEVENGADO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "MONTO_EJERCICIO",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "format": "default",
+            "groupChar": "",
+            "name": "MONTO_EJERCIDO",
+            "type": "number"
+          },
+          {
+            "format": "default",
+            "name": "MONTO_MODIFICADO",
+            "type": "string"
+          },
+          {
+            "format": "default",
+            "name": "MONTO_PAGADO",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ]
+}
