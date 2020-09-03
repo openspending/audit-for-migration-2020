@@ -1,0 +1,11 @@
+TRANSFER_ADAPTERS:
+  basic:
+    factory: giftless.transfer.basic_streaming:factory
+    options:
+      storage_class: giftless.storage.google_cloud:GoogleCloudStorage
+      storage_options:
+        project_name: gift-data
+        bucket_name: gift-datasets
+        account_key_file: credentials.json
+AUTH_PROVIDERS:
+  - giftless.auth.allow_anon:read_write

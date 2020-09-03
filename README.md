@@ -1,14 +1,13 @@
 # Table of contents
 
-- [Table of contents](#table-of-contents)
-  - [More on the OpenSpending database](#more-on-the-openspending-database)
-  - [OpenSpending database - Basic statistics](#openspending-database---basic-statistics)
-  - [Database samples](#database-samples)
-  - [How we filter what to keep when auditing](#how-we-filter-what-to-keep-when-auditing)
-  - [How we retrieve the metadata from Elasticsearch](#how-we-retrieve-the-metadata-from-elasticsearch)
-    - [Prerequisites](#prerequisites)
-    - [Guide](#guide)
-
+  * [More on the OpenSpending database](#more-on-the-openspending-database)
+  * [OpenSpending database - Basic statistics](#openspending-database---basic-statistics)
+  * [Database samples](#database-samples)
+  * [How we filter what to keep when auditing](#how-we-filter-what-to-keep-when-auditing)
+  * [How we retrieve the metadata from Elasticsearch](#how-we-retrieve-the-metadata-from-elasticsearch)
+    * [Prerequisites](#prerequisites)
+    * [Guide](#guide)
+* [How we retrieve data from S3 and store it in Google Cloud Storage with a Giftless server](#how-we-retrieve-data-from-s3-and-store-it-in-google-cloud-storage-with-a-giftless-server)
 ## More on the OpenSpending database
 
 You can find more information about how we are auditing the database in this public spreadsheet:
@@ -105,3 +104,9 @@ _The following guide was written by [Victor Nițu](https://github.com/nightsh)._
 8. To import, use the reverse command (input is a file, output is a ES endpoint).
 
 More info re:usage [here](https://github.com/elasticsearch-dump/elasticsearch-dump#use).
+
+---
+
+# How we retrieve data from S3 and store it in Google Cloud Storage with a Giftless server
+
+The whole process is described in [this short guide](./s3_to_google_cloud_storage/README.md).
