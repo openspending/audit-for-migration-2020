@@ -1,41 +1,64 @@
+# Standard library imports
 from pathlib import Path
 import json
 import os
+import string
 
+# Third-party libraries imports
 import requests
-
-# Map name of repo to datapackage.json URL
-REPOS = {
-    "costa-rica-presupuesto-egresos-2017": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/egresos_2017_cr/final/datapackage.json",
-    "costa-rica-presupuesto-egresos-2018": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/egreso_2018_cr/final/datapackage.json",
-    "costa-rica-presupuesto-egresos-2019": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/egresos_2019_cr/final/datapackage.json",
-    "costa-rica-presupuesto-egresos-2020": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/e2020_cr_ene_feb/final/datapackage.json",
-    "costa-rica-presupuesto-ingresos-2017": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/ingresos_2017_cr/final/datapackage.json",
-    "costa-rica-presupuesto-ingresos-2018": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/ingresos_2018_cr/final/datapackage.json",
-    "costa-rica-presupuesto-ingresos-2019": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/ingresos_2019_cr/final/datapackage.json",
-    "costa-rica-presupuesto-ingresos-2020": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/ingreso2020ene_may/final/datapackage.json",
-    "croatia-budget-spending": "http://s3.amazonaws.com/datastore.openspending.org/667df60aa07c34260eae9b55b2778712/croatia-budget-spending/final/datapackage.json",
-    "paraguay-2017": "https://s3.amazonaws.com:443/datastore.openspending.org/d2e8215903dc37020268704e584dda11/pgn-2017/datapackage.json",
-    "presupuesto-mexico-2008-2019": "http://s3.amazonaws.com/datastore.openspending.org/667df60aa07c34260eae9b55b2778712/presupuesto_mexico/final/datapackage.json",
-    "republica-dominicana-gastos-economica-2014-2020": "http://datastore.openspending.org/d12b5fcc290ca2a801abdf9603d5969b/ingresoseconomica/final/datapackage.json",
-    "south-africa-national-estimates-2015-2019": "http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/budgeted-and-actual-national-expenditure-of-south-africa-uploaded-2019-11-01t1258/final/datapackage.json",
-    "south-africa-provincial-estimates-2018-2019": "http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/estimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/final/datapackage.json",
-}
+import unidecode
 
 
-def generate_repos_empty_list_resources(repos=REPOS) -> dict:
+def get_datasets_map() -> dict:
+    """Map name of repo to datapackage.json URL. Return a dict."""
+    with open("datasets.json") as datasets_file:
+        datasets_map = json.load(datasets_file)
+    return datasets_map
+
+
+def convert_string_to_proper_title(title: str) -> str:
+    allowed_chars = string.ascii_letters + string.digits + "-"
+    title = unidecode.unidecode(title.lower())  # get rid of all diacritics
+    new_title = ""
+    for char in title:
+        if char in allowed_chars:
+            new_title += char
+        elif char in [" ", ".", "_"]:  # convert those characters to dashes
+            new_title += "-"
+    while "--" in new_title:  # clean up possible duplicate characters
+        new_title = new_title.replace("--", "-")
+    return new_title.strip("-")  # may get a dash at one of the ends
+
+
+def generate_repo_titles_from_dataset_map(datasets_map: dict) -> dict:
+    """Take in `datasets_map` and return a modified dict with a proper
+    title for each dataset. This is the title we use to create the repo
+    on GitHub."""
+    datasets_map_final = {}
+    for name in datasets_map:
+        new_title = convert_string_to_proper_title(name)
+        datasets_map_final[new_title] = datasets_map[name]
+    return datasets_map_final
+
+
+def generate_repos_empty_list_resources(datasets_map: dict) -> dict:
     """Get a dictionary with the name of the repos we are interested in,
     each one being set to an empty list."""
     repos_list_resources = {}
-    for repo_name in repos.keys():
+    for repo_name in datasets_map:
         repos_list_resources[repo_name] = []
     return repos_list_resources
 
 
-def download_data_packages(repos=REPOS):
-    """Download  the datapackage.json file for each repo."""
-    for repo_name, package_url in repos.items():
-        repo_dir = Path(repo_name)
+def download_data_packages(datasets_map: dict):
+    """Download the datapackage.json file for each repo."""
+    for repo_name, package_url in datasets_map.items():
+        print(f"[{repo_name}] Retrieving {package_url}...")
+        repo_dir = Path("data/" + repo_name)
+        try:
+            os.mkdir(repo_dir)
+        except FileExistsError:
+            pass
         repo_file = repo_dir / "datapackage.json"
         r = requests.get(package_url)
 
@@ -43,23 +66,41 @@ def download_data_packages(repos=REPOS):
             f.write(r.text)
 
 
-def get_resources(repos=REPOS) -> dict:
+# NOTE: The script was hanging without chunking big files.
+# This solved the issue.
+def download_file(url: str, path: str) -> str:
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(path, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    return path
+
+
+def get_resources(datasets_map: dict) -> dict:
     """Download all the resources for each repo."""
-    repos_list_resources = generate_repos_empty_list_resources()
-    for repo_name, repo_resources in repos_list_resources.items():
-        repo_path = Path(repo_name)
+    repos_list_resources = generate_repos_empty_list_resources(datasets_map)
+    for repo_name in repos_list_resources:
+        repo_path = Path("data/" + repo_name)
         repo_file = repo_path / "datapackage.json"
-        repo_package_url = repos[repo_name].rstrip("datapackage.json")
+        repo_package_url = datasets_map[repo_name].rstrip("datapackage.json")
 
         with open(repo_file) as f:
-            content = f.read()
-        json_content = json.loads(content)
+            json_content = json.load(f)
         for resource in json_content["resources"]:
             resource_path = resource["path"]
             resource_url = repo_package_url + resource_path
             resource_local_path = repo_path / resource_path
-            print("Getting", resource_url)
-            print("saving to...", resource_local_path)
+
+            if (
+                os.path.exists(resource_local_path)
+                and os.stat(resource_local_path).st_size != 0
+            ):
+                continue
+            if "test" in resource_url.lower():
+                continue
+
+            print(f"[{resource_local_path}] Retrieving {resource_url}...")
 
             if "/data" in resource_url:
                 try:
@@ -67,11 +108,12 @@ def get_resources(repos=REPOS) -> dict:
                 except FileExistsError:
                     pass
 
-            r = requests.get(resource_url)
-            with open(resource_local_path, "w") as f:
-                f.write(r.text)
+            download_file(url=resource_url, path=resource_local_path)
 
 
 if __name__ == "__main__":
-    download_data_packages()
-    get_resources()
+    DATASETS_MAP = get_datasets_map()
+    DATASETS_MAP = generate_repo_titles_from_dataset_map(DATASETS_MAP)
+
+    download_data_packages(DATASETS_MAP)
+    get_resources(DATASETS_MAP)
