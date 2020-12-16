@@ -35,6 +35,10 @@ def generate_repos_empty_list_resources(repos=REPOS) -> dict:
 def download_data_packages(repos=REPOS):
     """Download  the datapackage.json file for each repo."""
     for repo_name, package_url in repos.items():
+        try:
+            os.mkdir(repo_name)
+        except FileExistsError:
+            pass
         repo_dir = Path(repo_name)
         repo_file = repo_dir / "datapackage.json"
         r = requests.get(package_url)
@@ -58,18 +62,19 @@ def get_resources(repos=REPOS) -> dict:
             resource_path = resource["path"]
             resource_url = repo_package_url + resource_path
             resource_local_path = repo_path / resource_path
-            print("Getting", resource_url)
-            print("saving to...", resource_local_path)
+            if not os.path.exists(resource_local_path):
+                print("Getting", resource_url)
+                print("saving to...", resource_local_path)
 
-            if "/data" in resource_url:
-                try:
-                    os.mkdir(repo_path / "data")
-                except FileExistsError:
-                    pass
+                if "data/" in resource_path:
+                    try:
+                        os.mkdir(repo_path / "data")
+                    except FileExistsError:
+                        pass
 
-            r = requests.get(resource_url)
-            with open(resource_local_path, "w") as f:
-                f.write(r.text)
+                r = requests.get(resource_url)
+                with open(resource_local_path, "w") as f:
+                    f.write(r.text)
 
 
 if __name__ == "__main__":
