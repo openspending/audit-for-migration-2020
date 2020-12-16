@@ -16,6 +16,7 @@ REPOS = {
     "costa-rica-presupuesto-ingresos-2020": "http://datastore.openspending.org/2e6c7fb02a09883c5556f341e814d3bf/ingreso2020ene_may/final/datapackage.json",
     "croatia-budget-spending": "http://s3.amazonaws.com/datastore.openspending.org/667df60aa07c34260eae9b55b2778712/croatia-budget-spending/final/datapackage.json",
     "paraguay-2017": "https://s3.amazonaws.com:443/datastore.openspending.org/d2e8215903dc37020268704e584dda11/pgn-2017/datapackage.json",
+    "presupuesto-de-uruguay": "http://s3.amazonaws.com/datastore.openspending.org/667df60aa07c34260eae9b55b2778712/presupuesto_de_uruguay/final/datapackage.json",
     "presupuesto-mexico-2008-2019": "http://s3.amazonaws.com/datastore.openspending.org/667df60aa07c34260eae9b55b2778712/presupuesto_mexico/final/datapackage.json",
     "republica-dominicana-gastos-economica-2014-2020": "http://datastore.openspending.org/d12b5fcc290ca2a801abdf9603d5969b/ingresoseconomica/final/datapackage.json",
     "south-africa-national-estimates-2015-2019": "http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/budgeted-and-actual-national-expenditure-of-south-africa-uploaded-2019-11-01t1258/final/datapackage.json",
