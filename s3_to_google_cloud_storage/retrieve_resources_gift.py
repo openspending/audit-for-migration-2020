@@ -1,7 +1,11 @@
 from pathlib import Path
+from operator import itemgetter
+import csv
+import glob
 import json
 import os
 
+import cchardet as chardet
 import requests
 
 # Map name of repo to datapackage.json URL
@@ -78,6 +82,92 @@ def get_resources(repos=REPOS) -> dict:
                     f.write(r.text)
 
 
+def detect_file_encoding(path: str) -> str:
+    """Using cchardet is slower but much better than depending only on
+    requests, which makes an 'educated guess' that's not always precise."""
+    with open(path, "rb") as f:
+        msg = f.read()
+        return chardet.detect(msg)["encoding"]
+
+
+def select_smallest_file_available(
+    path: str, dp: dict, min_size_mb: int = 5
+) -> str:
+    """This function is useful to determine if we can read a relatively small
+    resource instead of jumping on the first one, which might be huge in the
+    GBs. Working with huge files in memory will prove inefficient and finding
+    their encoding with `cchardet` will be very slow too."""
+    sizes = []
+    for resource in dp["resources"]:
+        resource_path = f"{path}/{resource['path']}"
+        file_size = Path(resource_path).stat().st_size
+        sizes.append((file_size, resource_path))
+
+    # sort resources by their size in bytes
+    sizes.sort(key=itemgetter(0))
+
+    small_enough_size = False
+    for idx, size in enumerate(sizes):
+        if size[0] / 1_000_000 < min_size_mb:
+            # size is less than min size,
+            # let's keep looking for something bigger
+            continue
+        else:
+            resource_path = size[1]  # take only the path from the tuple
+            small_enough_size = True
+            break
+
+    if not small_enough_size:  # none of the resources are big enough
+        # then just pick the largest one available
+        resource_path = sizes[-1][1]  # again, just the path portion
+
+    return resource_path
+
+
+def add_sample_property_from_resource_to_data_package(
+    path: str, num_rows=50
+) -> None:
+    dp_path = f"{path}/datapackage.json"
+    with open(dp_path) as fp:
+        dp = json.load(fp)
+
+    # if we don't have any resources, well there's no sample to add,
+    # let's print that
+    if not dp.get("resources"):
+        print(f"The file {dp_path} lists no resources!")
+        return
+
+    resource_path = select_smallest_file_available(path, dp, min_size_mb=5)
+
+    encoding = detect_file_encoding(resource_path)
+    print(resource_path, encoding)
+    with open(resource_path, encoding=encoding) as fp:
+        csv_reader = csv.reader(fp)
+        list_of_rows = list(csv_reader)
+
+    # save only up to `num_rows` number of rows
+    sample_rows = []
+    for idx, row in enumerate(list_of_rows):
+        if idx < num_rows:
+            sample_rows.append(row)
+        else:
+            break
+
+    dp["sample"] = sample_rows  # add 'sample' property to data package
+    with open(dp_path, "w") as fp:
+        json.dump(dp, fp, indent=2)
+
+
+def add_sample_to_all_data_packages_found(parent_dir: str = "."):
+    directory = parent_dir + "/**/datapackage.json"
+    for x in glob.glob(directory):
+        dir_path = Path(x).parent
+        add_sample_property_from_resource_to_data_package(dir_path)
+
+
 if __name__ == "__main__":
-    download_data_packages()
-    get_resources()
+    # download_data_packages()
+    # get_resources()
+    add_sample_to_all_data_packages_found(
+        parent_dir="/home/sglavoie/dev/datopian/github/openspending/gift-data"
+    )
